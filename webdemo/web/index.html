@@ -9,31 +9,56 @@ and open the template in the editor.
         <title>.:Formulario Contacto:.</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <script>
+            $(document).ready(function(){
+                $('#guardar').click(function(e){
+                  $.ajax({
+                      url:'./contServ',
+                      type:'post',
+                      data:$("#formulario").serialize(),
+                      success:function(result,estad,hrq){
+                          console.log('Enviado');
+                      },
+                      error:function(err,status){
+                          console.log(status);
+                      }
+                  });
+                  e.preventDefault();
+                });
+            }) ;
+
+      
+            
+        </script>
     </head>
     <body>
-        <form method="post" action="./contServ">
-        <table>
-            <tr>
-                <td>Id</td>
-                <td><input type="text" name="id"/></td>
-            </tr>
-            <tr>
-                <td>Nombres</td>
-                <td><input type="text" name="nombres"/></td>
-            </tr>
-            <tr>
-                <td>Apellidos</td>
-                <td><input type="text" name="apellidos"/></td>
-            </tr>
-            <tr>
-                <td>Correo</td>
-                <td><input type="email" name="correo"/></td>
-            </tr>
-            <tr>
-                
-                <td colspan="2"><input type="submit" value="Guardar"/></td>
-            </tr>
-        </table>
-        </form>
+            <form id="formulario">
+            <table>
+                <tr>
+                    <td>Id</td>
+                    <td><input type="text" name="id" id="id"/></td>
+                </tr>
+                <tr>
+                    <td>Nombres</td>
+                    <td><input type="text" name="nombres" id="nombres"/></td>
+                </tr>
+                <tr>
+                    <td>Apellidos</td>
+                    <td><input type="text" name="apellidos" id="apellidos"/></td>
+                </tr>
+                <tr>
+                    <td>Correo</td>
+                    <td><input type="email" name="correo" id="correo"/></td>
+                </tr>
+                <tr>
+
+                    <td><button id='guardar'>Guardar</button></td>
+                    <td><input type="button" name="ver" value="Ver"/></td>
+                </tr>
+            </table>
+            </form>
     </body>
 </html>
+
